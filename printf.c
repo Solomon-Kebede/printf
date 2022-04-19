@@ -30,9 +30,36 @@ int _printf(const char *format, ...)
 	va_start(arglist, format);
 
 	for (i = 0; i <= strlen; i++)
-		_putchar(format[i]);
+	{
+		if (format[i] == '%')
+		{
+			if (format[i + 1] == '%')
+			{
+				if (format[i - 1] != '%')
+					_putchar('%');
+			}
+			/* TODO: HANDLING %c using a char argument */
+			else if (format[i + 1] == 'c')
+				_putchar(va_arg(arglist, int));
+			else if (format[i + 1] == 's')
+			{
+				/* TODO: extract string from va_arg */
+				/* as = va_arg(arglist, char *); */
+				for (j = 0; as[j] != '\0'; j++)
+					_putchar(as[j]);
+				_putchar('\0');
+			}
+			else if  (format[i + 1] == 'd' || format[i + 1] == 'i')
+			{
+				int m = va_arg(arglist, int);
+
+				_putchar(m + '0');
+				/* TODO: any integer number should be printable */
+			}
+		/* normal print */
+		else if (format[i - 1] != '%')
+			_putchar(format[i]);
 
 	va_end(arglist);
 	return (strlen);
 }
-
