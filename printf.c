@@ -15,3 +15,24 @@ int _strlen(const char *s)
 		;
 	return (i);
 }
+
+/**
+ * _printf - emulate the printf
+ * @format: character to be printed
+ * Return: length of string
+ */
+int _printf(const char *format, ...)
+{
+	int i, j, strlen;
+	va_list arglist;
+
+	strlen = _strlen(format);
+	va_start(arglist, format);
+
+	for (i = 0; i <= strlen; i++)
+		_putchar(format[i]);
+
+	va_end(arglist);
+	return (strlen);
+}
+
